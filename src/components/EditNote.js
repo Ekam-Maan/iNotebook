@@ -1,10 +1,22 @@
-import React, {useRef} from "react";
+import React, { useRef, useContext, useState } from "react";
+import noteContext from "../contexts/noteContext";
 
-const EditNote = () => {
-    const ref = useRef(null)
-    const showEditWindow = () =>{
-        ref.current.click();
+
+const EditNote = (props) => {
+    const {note} = props;
+    const closeButtonRef = useRef(null);
+    const[newNote, setNewNote] = useState(note);
+    const context = useContext(noteContext);
+    const { editNote } = context;
+
+    const handleSaveChanges = (e) =>{
+        editNote(newNote._id, newNote.title, newNote.tag, newNote.description);
+        closeButtonRef.current.click();
     }
+    const handleValueChange = (e) => {
+        setNewNote({...newNote,[e.target.name] : e.target.value})
+    }
+
 
   return (
          <div>
@@ -28,6 +40,7 @@ const EditNote = () => {
                                                 id="title"
                                                 name="title"
                                                 placeholder="Enter Title"
+                                                defaultValue={note.title}
                                                 onChange={handleValueChange}
                                                 required
                                             />
@@ -43,6 +56,7 @@ const EditNote = () => {
                                                 className="form-control"
                                                 id="tag"
                                                 name="tag"
+                                                defaultValue={note.tag}
                                                 placeholder="Enter a suitable tag"
                                                 onChange={handleValueChange}
                                             />
@@ -61,6 +75,7 @@ const EditNote = () => {
                                                 id="description"
                                                 name="description"
                                                 rows="3"
+                                                defaultValue={note.description}
                                                 onChange={handleValueChange}
                                             ></textarea>
                                         </div>
@@ -70,7 +85,7 @@ const EditNote = () => {
                                 </form>
                             </div>
                             <div className="modal-footer">
-                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button ref={closeButtonRef} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <button type="button" className="btn btn-primary" onClick={handleSaveChanges}>Save changes</button>
                             </div>
                         </div>

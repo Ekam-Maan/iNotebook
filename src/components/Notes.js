@@ -16,6 +16,7 @@ export default function Notes() {
     },[1])
 
     return (
+        <div>
         <div className="container">
             <div className="row">
                 {notes.map((note) => {
@@ -27,6 +28,7 @@ export default function Notes() {
                     );
                 })}
             </div>
+        </div>
         </div>
     );
 }
