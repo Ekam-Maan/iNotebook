@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 export default function Navbar() {
@@ -38,7 +38,12 @@ export default function Navbar() {
                             </li>
                             <li className="nav-item">
                                 <Link  className={`nav-link active=${location.pathname === '/about'}`} to="/about">
-                                    about
+                                    About
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link  className={`nav-link active=${location.pathname === '/newNote'}`} to="/newNote">
+                                New Note <i className="fa-sharp fa-solid fa-plus"></i>
                                 </Link>
                             </li>
                             <li className="nav-item">

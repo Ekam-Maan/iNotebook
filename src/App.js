@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import About from './components/About';
 import Home from './components/Home';
 import NoteState from './contexts/noteState';
+import NewNote from './components/NewNote';
 
 function App() {
   return (
@@ -15,10 +16,10 @@ function App() {
       <NoteState>
      <Router>
      <Navbar/>
-     <h1>This is iNotebook</h1>
      <Routes>
       <Route exact path="/" element={<Home/>}/>
       <Route exact path="/about" element={<About/>}/>
+      <Route exact path="/newNote" element={<NewNote/>}/>
      </Routes>
      </Router>
      </NoteState>
