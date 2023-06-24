@@ -86,10 +86,8 @@ const NoteState = (props) =>{
                 notes[index].tag = tag;
                 notes[index].description = description;
             }
-            
         }
         const newNotes = JSON.parse(JSON.stringify(notes));
-      
         setNotes(newNotes);
         console.log(newNotes);
     }

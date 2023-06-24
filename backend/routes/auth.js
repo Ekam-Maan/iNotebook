@@ -21,16 +21,17 @@ router.post(
     ).isLength({ min: 5 }),
   ],
   async (req, res) => {
+    let success = false;
     // validating the feilds
     const error = validationResult(req);
     if (!error.isEmpty()) {
-      return res.status(400).json({ errors: error.array() });
+      return res.status(400).json({ success, errors: error.array() });
     }
     try {
       // checking if the email is already in use.
       let user = await User.findOne({ email: req.body.email });
       if (user) {
-        res.status(400).json({ error: "This email is already registered." });
+        res.status(400).json({ success, error: "This email is already registered." });
       } else {
         //hashing the password
         const salt = await bcrypt.genSalt(10);
@@ -44,11 +45,12 @@ router.post(
 
         const data = { user: { id: user.id } };
         const authToken = jwt.sign(data, JWT_KEY);
-        res.json({ authToken });
+        success = true;
+        res.json({ success, authToken });
       }
     } catch (error) {
       console.log(error.message);
-      res.status(500).send("Some Internal error occured.");
+      res.status(500).json({success, error: "Some Internal error occured."});
     }
 
     // .then(user => res.send("User Created Successfully!"))
@@ -67,14 +69,16 @@ router.post(
   async (req, res) => {
    // validating the feilds
    const error = validationResult(req);
+   let success = false;
+   
    if (!error.isEmpty()) {
-     return res.status(400).json({errors: error.array() });
+     return res.status(400).json({success, errors: error.array() });
    }
     try {
       const user = await User.findOne({email: req.body.email });
 
       if (!user) {
-        return res.status(400).send("Please enter correct credentials");
+        return res.status(400).json({success, error: "Please enter correct credentials"});
       }
 
       const hashedPassword = user.password;
@@ -83,15 +87,18 @@ router.post(
         hashedPassword
       );
 
+
       if (!passwordMatched) {
-        return res.status(400).send("Please enter corrent credentials");
+        return res.status(400).json({success, error: "Please enter correct credentials"});
       }
+
       const data = { user: { id: user.id } };
       const authToken = jwt.sign(data, JWT_KEY);
-      res.json({ authToken });
+      success = true;
+      res.json({ success, authToken });
     } catch (error) {
         console.log(error.message);
-        return res.status(500).send("Some internal error occured");
+        return res.status(500).json({success, error: "Please enter correct credentials"});
     }
   }
 );
