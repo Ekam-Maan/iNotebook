@@ -53,6 +53,8 @@ export default function Navbar() {
                             </li>
                         </ul>
                         <form className="d-flex" role="search">
+                            {localStorage.getItem('authToken') ? <button className="btn btn-outline-danger" 
+                              onClick={()=>{localStorage.removeItem('authToken')}}>logout</button>: 
                             <Link
                                 className="btn btn-outline-success mx-1"
                                 type="submit"
@@ -60,6 +62,7 @@ export default function Navbar() {
                             >
                                 Login
                             </Link>
+                            }
                         </form>
                     </div>
                 </div>

@@ -1,11 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import noteContext from "../contexts/noteContext";
+import { useNavigate } from "react-router-dom";
 
 const NewNote = () => {
 
   const context = useContext(noteContext)
   const { addNote } = context;
   const [note, setNote] = useState({ title: "", description: "", tag: "" })
+  const navigate = useNavigate();
 
 
   const handleAddNote = (event) => {
@@ -20,11 +22,16 @@ const NewNote = () => {
     setNote({ ...note, [e.target.name]: e.target.value })
   }
 
+  useEffect(()=>{
+    if(!localStorage.getItem('authToken'))
+        navigate('/login')
+},[])
+
 
   return (
 
     <div className="container">
-
+      {/* if user is not logged in redirect to login page */}
       <h1>Add a New Note</h1>
       <form id='form'>
         <div className="mb-3 row">
@@ -81,6 +88,7 @@ const NewNote = () => {
         </button>
       </form>
     </div>
+  
   );
 };
 

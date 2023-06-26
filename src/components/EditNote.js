@@ -9,11 +9,14 @@ const EditNote = (props) => {
     const context = useContext(noteContext);
     const { editNote } = context;
 
+    
+
     const handleSaveChanges = (e) =>{
         editNote(newNote._id, newNote.title, newNote.tag, newNote.description);
         closeButtonRef.current.click();
     }
     const handleValueChange = (e) => {
+        console.log("edit note prop" + note.title);
         setNewNote({...newNote,[e.target.name] : e.target.value})
     }
 

@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import About from './components/About';
 import Home from './components/Home';
 import NoteState from './contexts/noteState';
+import AlertState from './contexts/alertState';
 import NewNote from './components/NewNote';
 import Login from './components/Login';
 import Singup from './components/Singup';
@@ -15,7 +16,8 @@ import Singup from './components/Singup';
 function App() {
   return (
     <div className="App">
-      <NoteState>
+     <AlertState>
+     <NoteState>
      <Router>
      <Navbar/>
      <Routes>
@@ -27,6 +29,8 @@ function App() {
      </Routes>
      </Router>
      </NoteState>
+     </AlertState>
+
     </div>
   );
 }

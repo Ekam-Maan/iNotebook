@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {useState } from "react";
 
 import noteContext from "./noteContext";
 
@@ -16,7 +16,7 @@ const NoteState = (props) =>{
              method: "GET",
              headers: {
                "Content-Type": "application/json",
-               "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQ4OTQwYTljZmEyNzQ1YzI0MjNjOGMxIn0sImlhdCI6MTY4NjcxNjU4NX0._-0cHorwLtgVNOKizEORN5_YI2Q0sEUJ3LFgLXJ3aDU"
+               "auth-token": localStorage.getItem('authToken')
              }
           });
         const notes = await response.json(); // parses JSON response into native JavaScript objects
@@ -31,25 +31,16 @@ const NoteState = (props) =>{
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQ4OTQwYTljZmEyNzQ1YzI0MjNjOGMxIn0sImlhdCI6MTY4NjcxNjU4NX0._-0cHorwLtgVNOKizEORN5_YI2Q0sEUJ3LFgLXJ3aDU"
+              "auth-token": localStorage.getItem('authToken')
               // 'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: JSON.stringify({"title": title, "description": description, "tag": tag}), // body data type must match "Content-Type" header
           });
 
           const mynote = await response.json();
-          console.log("My  note " + mynote);
-
-       const note = {
-            "_id": "648b7d012658ca2aff9ffb8b",
-            "userId": "648940a9cfa2745c2423c8c1",
-            "title": title,
-            "description": description,
-            "tag": tag,
-            "date": "2023-06-15T21:05:05.949Z",
-            "__v": 0
-          };
-        setNotes(notes.concat(note));
+          console.log("My  note str " + mynote);
+          console.log(mynote);
+          setNotes(notes.concat(mynote));
     }
     const deleteNote = async (id) =>{
             //API call
@@ -58,7 +49,7 @@ const NoteState = (props) =>{
                 method: "DELETE",
                 headers: {
                   "Content-Type": "application/json",
-                  "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQ4OTQwYTljZmEyNzQ1YzI0MjNjOGMxIn0sImlhdCI6MTY4NjcxNjU4NX0._-0cHorwLtgVNOKizEORN5_YI2Q0sEUJ3LFgLXJ3aDU"
+                  "auth-token": localStorage.getItem('authToken')
                   // 'Content-Type': 'application/x-www-form-urlencoded',
                 } });
         const updatedNotes = notes.filter((note)=>{ return note._id !== id});
@@ -72,7 +63,7 @@ const NoteState = (props) =>{
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
-              "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQ4OTQwYTljZmEyNzQ1YzI0MjNjOGMxIn0sImlhdCI6MTY4NjcxNjU4NX0._-0cHorwLtgVNOKizEORN5_YI2Q0sEUJ3LFgLXJ3aDU"
+              "auth-token": localStorage.getItem('authToken')
               // 'Content-Type': 'application/x-www-form-urlencoded',
             },
             body: JSON.stringify({"title": title, "description": description, "tag": tag}), // body data type must match "Content-Type" header

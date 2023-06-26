@@ -1,16 +1,16 @@
-import React, { useContext, useRef } from 'react'
+import React, { useContext} from 'react'
 import noteContext from '../contexts/noteContext';
-import EditNote from './EditNote';
 
-export default function NoteItem(props) {
-    const { note } = props;
+
+const NoteItem = (props) => {
+    const { note, updateNote} = props;
+
     const context = useContext(noteContext);
     const { deleteNote } = context;
-    const ref = useRef(null)
+ 
+    
 
-    const showEditWindow = () => {
-        ref.current.click();
-    }
+  
 
     const handleDeleteNote = () => {
         if (window.confirm("Are you sure to delete the note?"))
@@ -20,24 +20,21 @@ export default function NoteItem(props) {
 
    
 
-    const handleEditNote = () => {
-        showEditWindow();
-        console.log("Edit button presses");
-    }
+    // const handleEditNote = () => {
+    //     showEditWindow();
+    //     console.log("setting the state of " + note._id)
+    //     console.log("Edit button presses");
+    // }
 
+ 
 
     return (
+        
         <div>
-
-            <div>
-                <button type="button" className="btn btn-primary" ref={ref} data-bs-toggle="modal" data-bs-target="#exampleModal" hidden={true}>
-                    Launch edit modal
-                </button>
-                <EditNote note={note}/>
-                
-            </div>
+            
 
             <div className="card">
+                
                 <div className="card-header">
                     {note.tag}
                 </div>
@@ -46,7 +43,7 @@ export default function NoteItem(props) {
                     <p className="card-text">{note.description}</p>
                     <div className="d-flex justify-content-around">
                         <i className="fa-solid fa-trash-can" onClick={handleDeleteNote}></i>
-                        <i className="fa-solid fa-pen-to-square" onClick={handleEditNote}></i>
+                        <i className="fa-solid fa-pen-to-square" onClick={()=>{updateNote(note)}}></i>
 
                     </div>
 
@@ -57,3 +54,4 @@ export default function NoteItem(props) {
     )
 }
 
+export default NoteItem;
