@@ -9,7 +9,6 @@ const NewNote = () => {
   const [note, setNote] = useState({ title: "", description: "", tag: "" })
   const navigate = useNavigate();
 
-
   const handleAddNote = (event) => {
     event.preventDefault();
     console.log("new note handled");

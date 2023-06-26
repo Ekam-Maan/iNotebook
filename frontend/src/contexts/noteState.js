@@ -52,6 +52,7 @@ const NoteState = (props) =>{
                   "auth-token": localStorage.getItem('authToken')
                   // 'Content-Type': 'application/x-www-form-urlencoded',
                 } });
+                console.log(response);
         const updatedNotes = notes.filter((note)=>{ return note._id !== id});
         setNotes(updatedNotes);
     }
@@ -72,7 +73,7 @@ const NoteState = (props) =>{
           //changing note on the cliet side
         for (let index = 0; index < notes.length; index++) {
             const note = notes[index];
-            if(note._id == id){
+            if(note._id === id){
                 notes[index].title = title;
                 notes[index].tag = tag;
                 notes[index].description = description;
@@ -80,7 +81,7 @@ const NoteState = (props) =>{
         }
         const newNotes = JSON.parse(JSON.stringify(notes));
         setNotes(newNotes);
-        console.log(newNotes);
+        console.log(response);
     }
 
     // const update = () =>{

@@ -51,7 +51,7 @@ const Login = () => {
       <div className="row">
         <div className="col-md-6 col-lg-6 col-xl-5">
             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-            className="img-fluid" alt="Sample image"/>
+            className="img-fluid" alt='Login'/>
         </div>
         <form className=' col-md-6 col-lg-6 col-xl-5 my-5 mx-auto border border-dark rounded' onSubmit={handleLogin}>
                 <div className="mb-3 my-2">
