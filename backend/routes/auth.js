@@ -75,7 +75,7 @@ router.post(
      return res.status(400).json({success, errors: error.array() });
    }
     try {
-      const user = await User.findOne({email: req.body.email });
+      const user = await User.findOne({'email': req.body.email });
 
       if (!user) {
         return res.status(400).json({success, error: "Please enter correct credentials"});
@@ -98,7 +98,7 @@ router.post(
       res.json({ success, authToken });
     } catch (error) {
         console.log(error.message);
-        return res.status(500).json({success, error: error.message});
+        return res.status(500).json({success, error: req.body.email + " -- " + error.message});
     }
   }
 );
