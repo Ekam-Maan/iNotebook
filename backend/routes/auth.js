@@ -50,7 +50,7 @@ router.post(
       }
     } catch (error) {
       console.log(error.message);
-      res.status(500).json({success, error: "Some Internal error occured."});
+      res.status(500).json({success, error: error.message});
     }
 
     // .then(user => res.send("User Created Successfully!"))
