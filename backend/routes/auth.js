@@ -98,7 +98,7 @@ router.post(
       res.json({ success, authToken });
     } catch (error) {
         console.log(error.message);
-        return res.status(500).json({success, error: "Please enter correct credentials"});
+        return res.status(500).json({success, error: error.message});
     }
   }
 );
